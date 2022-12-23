@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css files -->
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/cards.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Bebas+Neue&family=Changa:wght@200;300;400;500;600;700;800&family=Gemunu+Libre:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>New Word</title>
+</head>
+<body>
+    <section class="container-md h-100">
+        <div class="d-flex">
+            <button class="search-btn">
+                <img src="./icons/loupe.svg">
+            </button>
+            <input type="text" placeholder="إبحث عن كلماتي" id="s" class="search w-100 bg-light p-3 my-3 text-end">
+            <button class="menu" id="menu-btn">---</button>
+        </div>
+        <div class="w-100 justify-content-between d-flex align-itmes-center wrap">
+            <button class="fs-5 my-btn my-3 px-4 py-2 ps-5" id="add">كلمة جديدة</button>
+            <h1 class="text-white m-0 d-flex align-itmes-center flex-wrap justify-content-end fw-bold">الكلمات
+                <p id="number" class="text-muted w-100 fs-6 m-0 text-end fw-normal">لا يوجد لديك كلمات</p>
+            </h1>
+        </div>
+        <div id="all"></div>
+        <div class="container-fluid p-0 m-0 d-none research-result" id="research-result-p">
+            <div class="research-result-c container-md p-3">
+                <button id="hide" class="fs-1">×</button>
+                <div id="research-result"></div>
+            </div>
+        </div>
+        <div id="add-board" class="d-none add-board p-3 pt-0">
+            <div class="w-100 d-flex justify-content-center close mb-4">
+                <button id="close" class="fs-1">></button>
+            </div>
+            <div class="container-md d-flex flex-wrap">
+                <h2 class="w-75 p-2 text-end pb-3 fw-bold mt-5" id="status">أضف كلمة جديدة</h2>
+                <input type="text" id="text" class="bg-light p-2 w-75 mb-3" placeholder="أضف الكلمة التي تريد ترجمتها"
+                autocomplete="off">
+                <span class="w-25 d-flex justify-content-end">
+                    <button id="voice" class="voice">
+                        <img src='./icons/black.svg'>
+                    </button>
+                </span>
+                <textarea id="result" class="p-2 w-75 text-end" placeholder="الترجمة"
+                autocomplete="off"></textarea>
+                <span class="w-25 d-flex justify-content-end align-itmes-center">
+                    <button id="audio" class="voice">
+                        <img src="./icons//speaker-filled-audio-tool.png">
+                    </button>
+                </span>
+                <strong id="warning" class="w-75 p-1 text-end"></strong>
+                <div class="w-100 pt-3">
+                    <button class="my-btn-two px-3 py-1 fs-4" id="my-btn">أضف</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="w-100 d-flex justify-content-center align-items-center cards h-100 d-none" id="cards">
+        <button id="crads-close">×</button>
+        <div class="flip-card">
+            <div class="flip-card-inner" id="face">
+                <span class="face flip-card-front">
+                    <p class="text-light fs-1 fw-bold" id="text-1"></p>
+                </span>
+                <span class="back flip-card-back" id="back">
+                    <p class="text-light fs-1 fw-bold" id="text-2"></p>
+                </span>
+            </div>
+        </div>
+    </section>
+    <div class="p w-100 d-none" id="nav">
+        <div class="container-md d-flex justify-content-end">
+        <nav class="nav" >
+            <ul>
+                <li>
+                    <button class="w-100 text-end p-2 bg-transparent text-light fs-5 fw-bold" id='words-btn'>الكلمات</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button class="my-4 w-100 text-end p-2 bg-transparent text-light fs-5 fw-bold" id="cards-btn">البطاقات</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button class="w-100 text-end p-2 bg-transparent text-danger fs-5 fw-bold del-all" id="del-all">
+                        <img src="./icons/delete.png">
+                        حذف جميع الكلمات
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        </div>
+    </div>
+    <!-- jquery -->
+    <script src="./jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./p5.js"></script>
+    <script src="./main.js"></script>
+    <script src="./cards.js"></script>
+</body>
+</html>
